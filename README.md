@@ -3,6 +3,7 @@
 - Bootstrapped `ember` using its CLI to get a sense of its behaviours
 - esssentially copies the `react` version in terms of functionality
   - (albeit with slightly less exacting CSS, kinda ran outta time)
+- didnt bother with any Tests, just to save some time.
 
 ### URL & Build status
 
