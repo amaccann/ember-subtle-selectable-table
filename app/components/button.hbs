@@ -1,0 +1,8 @@
+<button 
+  type="button"
+  aria-label={{@label}}
+  class="button"
+  disabled={{@disabled}}
+  {{on 'click' (fn @onClick @label)}}>
+  {{yield}}
+</button>
