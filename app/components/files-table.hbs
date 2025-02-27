@@ -1,0 +1,78 @@
+{{!-- template-lint-disable no-invalid-interactive --}}
+
+<Box className="table-actions" @gap="32">
+  <Box gap="8">
+    <input
+      aria-label="Select all"
+      class="checkbox"
+      checked={{this.areAllSelected}}
+      indeterminate={{this.isIndeterminate}}
+      title="Select all"
+      type="checkbox"
+      {{on 'change' (fn this.onChangeSelectAll @label)}}
+    />
+
+    <label title="Selected total" for="select-all">
+      {{this.selectedLength}}
+    </label>
+  </Box>
+  
+  <Button
+    @disabled={{this.isDownloadDisabled}}
+    @label="Download selected"
+    
+    @onClick={{this.onClickDownload}}>
+    Download selected
+  </Button>
+</Box>
+
+{{#if this.pendingAvailable.length}}
+  {{#each this.pendingAvailable as |file|}}
+    <span>{{file.name}}</span>,
+  {{/each}}
+  not yet available for download
+{{/if}}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th />
+      <th>Name</th>
+      <th>Device</th>
+      <th>Path</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each @files as |file|}}
+  <tr class="table-row" {{on "click" (fn this.onToggleRow file)}}>
+    <td>
+      <input
+        aria-label={{file.name}}
+        type="checkbox"
+        checked={{this.getIsSelected file}}
+        label={{file.name}}
+      />
+    </td>
+    <td>
+      {{file.name}}
+    </td>
+    <td>
+      {{file.device}}
+    </td>
+    <td>
+      {{file.path}}
+    </td>
+    <td>
+      {{!-- <Box alignItems="center">
+        {file.status === FileStatus.Available ? <Dot variant={DotVariants.Success} /> : null}
+      </Box> --}}
+        <span>{{this.toSentenceCase file.status}}</span>
+    </td>
+  </tr>
+{{/each}} 
+  </tbody>
+
+</table>
+
+{{yield}}
